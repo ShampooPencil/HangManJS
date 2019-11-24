@@ -24,53 +24,41 @@ var showLines = document.getElementById("lines");
 
 //var stored = "";//instead of just var string, im 
 //thinking adding a array so i can compare later on with thr random word and show the letter correctly
-var stored = [];
-console.log(stored);
+var storedWord = [];
 var allWords = ["Andrew", "Cat", "BuzzLight", "alcohol", "couches", "bookbag"
 ]
 
 var random = allWords[Math.floor(Math.random() * allWords.length)];
 console.log(random);
 var word = random.replace(/\w/g, "_" + ' ');
-// for (var i = 0; i < random.length; i++){
-//     // document.getElementById("lines").innerHTML += "&#x268A;";
-//     // showLines.innerHTML += "______&nbsp;&nbsp;";
-//     showLines.innerHTML += word + " ";
-
-// }
 showLines.innerHTML = word;
 var changeEl = "";
 for (var i = 0; i < word.length; i++) {
 
     changeEl += word[i];
     
-    //random[i] += " ";
-
-
 }
-
 var stringArray = random.split('').join(' ');
-stringArray += " ";
-console.log(stringArray); // ["my", " ", "car", " ", "is", " ", "red"]
-var res = random.split("");
-console.log(changeEl.length);
-console.log(changeEl)
-
-console.log(stringArray.length);
-//console.log(word);
-console.log(stringArray);
-if(changeEl.length === stringArray.length){
-    console.log(true);
+stringArray += " "; // ["my", " ", "car", " ", "is", " ", "red"]
+for (var x = 0; x < stringArray.length; x++){
+    storedWord.push(stringArray[x].toUpperCase());
 }
+var res = random.split(" ");
+//res = res.join("");
+//res = res.join(" ");
+//console.log(changeEl.length);
+console.log(res.join(', '));
+console.log(stringArray);
+console.log(storedWord);
 var ar = changeEl.split("");
+var compareArrays = stringArray.split(" ");
+console.log(compareArrays.join(', '));
 // var whileTrue = true;
 document.onkeyup = function (event) {
     addValue = event.key; //well i typed some letters and it showed in the chrome console
     console.log(addValue);
     console.log(random);
     //var question = prompt('guess a letter!');
-    stored.push(addValue);
-
     for (var j = 0; j < stringArray.length; j++) {
         //var ar = changeEl.split(""); // split string on comma space
         //console.log( ar );
@@ -101,8 +89,12 @@ document.onkeyup = function (event) {
 
     }
     // var newWord = changeEl;
+    if(ar.join("") == storedWord.join("")){
+        console.log(true);
+        alert("you did it!!!!");
+    }
     var showLines = document.getElementById("lines");
-    showLines.innerHTML = ar.toString();
+    showLines.innerHTML = ar.join('');
 }
 console.log(addValue);
 
