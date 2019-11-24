@@ -17,149 +17,171 @@
 // In the beginning, the player can pick unlimited guesses.(after that works, 
 // we wil pick limit of how many picked the player can guess)
 
-var storeGuess = "";
-var addValue = "";
-var showLines = document.getElementById("lines");
-
-
-//var stored = "";//instead of just var string, im 
-//thinking adding a array so i can compare later on with thr random word and show the letter correctly
-var storedWord = [];
-var allWords = ["Andrew", "Cat", "BuzzLight", "alcohol", "couches", "bookbag"
-]
-
-var random = allWords[Math.floor(Math.random() * allWords.length)];
-console.log(random);
-var word = random.replace(/\w/g, "_" + ' ');
-showLines.innerHTML = word;
-var changeEl = "";
-for (var i = 0; i < word.length; i++) {
-
-    changeEl += word[i];
-    
-}
-var stringArray = random.split('').join(' ');
-stringArray += " "; // ["my", " ", "car", " ", "is", " ", "red"]
-for (var x = 0; x < stringArray.length; x++){
-    storedWord.push(stringArray[x].toUpperCase());
-}
-var res = random.split(" ");
-//res = res.join("");
-//res = res.join(" ");
-//console.log(changeEl.length);
-console.log(res.join(', '));
-console.log(stringArray);
-console.log(storedWord);
-var ar = changeEl.split("");
-var compareArrays = stringArray.split(" ");
-console.log(compareArrays.join(', '));
-// var whileTrue = true;
-document.onkeyup = function (event) {
-    addValue = event.key; //well i typed some letters and it showed in the chrome console
-    console.log(addValue);
-    console.log(random);
-    //var question = prompt('guess a letter!');
-    for (var j = 0; j < stringArray.length; j++) {
-        //var ar = changeEl.split(""); // split string on comma space
-        //console.log( ar );
-        // [ "apple", "orange", "pear", "banana", "raspberry", "peach" ]
-        var trackingVar = j;
-        if (addValue === stringArray[j].toLowerCase()) {
-            console.log(stringArray[j]);
-            //console.log(true);
-            console.log(changeEl[j]);
-               
-            //it now only take the  right 
-            //changeEl = ar.replace(ar[j], addValue);
-            ar[j] = addValue.toUpperCase();
-            console.log(ar)
-            //changeEl = changeEl.replace(changeEl[trackingVar], addValue.toUpperCase());
-            // var newWord = changeEl;
-            // console.log(newWord);
-            //var showLines = document.getElementById("lines");
-            // document.getElementById("lines") = showLines;
-            // showLines.innerHTML = changeEl;
-           
-            storeGuess += addValue;
-            continue;
-            // }
-            //break;
-        }
-        console.log(changeEl);
-
-    }
-    // var newWord = changeEl;
-    if(ar.join("") == storedWord.join("")){
-        console.log(true);
-        alert("you did it!!!!");
-    }
+function afterMainGame() {
+    var storeGuess = "";
+    var addValue = "";
     var showLines = document.getElementById("lines");
-    showLines.innerHTML = ar.join('');
+
+    //document.getElementById("youWon").innerHTML = "";
+    //var stored = "";//instead of just var string, im 
+    //thinking adding a array so i can compare later on with thr random word and show the letter correctly
+    var storedWord = [];
+    var allWords = ["Andrew", "Cat", "BuzzLight", "alcohol", "couches", "bookbag"
+    ]
+
+    var random = allWords[Math.floor(Math.random() * allWords.length)];
+    console.log(random);
+    var word = random.replace(/\w/g, "_" + ' ');
+    showLines.innerHTML = word;
+    var changeEl = "";
+    for (var i = 0; i < word.length; i++) {
+
+        changeEl += word[i];
+
+    }
+    var stringArray = random.split('').join(' ');
+    stringArray += " "; // ["my", " ", "car", " ", "is", " ", "red"]
+    for (var x = 0; x < stringArray.length; x++) {
+        storedWord.push(stringArray[x].toUpperCase());
+    }
+    var res = random.split(" ");
+    //res = res.join("");
+    //res = res.join(" ");
+    //console.log(changeEl.length);
+    console.log(res.join(', '));
+    console.log(stringArray);
+    console.log(storedWord);
+    var ar = changeEl.split("");
+    var compareArrays = stringArray.split(" ");
+    console.log(compareArrays.join(', '));
+    // var whileTrue = true;
+    document.onkeyup = function (event) {
+        if (ar.join("") !== storedWord.join("")) {
+            document.getElementById("youWon").innerHTML = "";
+        }
+        addValue = event.key; //well i typed some letters and it showed in the chrome console
+        console.log(addValue);
+        console.log(random);
+        //var question = prompt('guess a letter!');
+        for (var j = 0; j < stringArray.length; j++) {
+            if (ar.join("") == storedWord.join("")) {
+                console.log(true);
+                document.getElementById("youWon").innerHTML = "<p>You Won!</p>";
+                mainGame();
+            }
+            if (addValue === stringArray[j].toLowerCase()) {
+                console.log(stringArray[j]);
+                //console.log(true);
+                console.log(changeEl[j]);
+
+                //it now only take the  right 
+                //changeEl = ar.replace(ar[j], addValue);
+                ar[j] = addValue.toUpperCase();
+                console.log(ar)
+
+                storeGuess += addValue;
+                continue;
+                // }
+                //break;
+            }
+            console.log(changeEl);
+
+        }
+       
+        var showLines = document.getElementById("lines");
+        showLines.innerHTML = ar.join('');
+      
+    }
+   
 }
-console.log(addValue);
+function mainGame() {
+    var storeGuess = "";
+    var addValue = "";
+    var showLines = document.getElementById("lines");
+    var timeoutID;
 
+    function delayedAlert() {
+        timeoutID = window.setTimeout(window.alert, 2*1000, 'You Won!');
+    }
+    //document.getElementById("youWon").innerHTML = "";
+    //var stored = "";//instead of just var string, im 
+    //thinking adding a array so i can compare later on with thr random word and show the letter correctly
+    var storedWord = [];
+    var allWords = ["Andrew", "Cat", "BuzzLight", "alcohol", "couches", "bookbag"
+    ]
 
-//console.log(random);
+    var random = allWords[Math.floor(Math.random() * allWords.length)];
+    console.log(random);
+    var word = random.replace(/\w/g, "_" + ' ');
+    showLines.innerHTML = word;
+    var changeEl = "";
+    for (var i = 0; i < word.length; i++) {
 
-// Random words stored, and shows the underlined words in the 
-// beginning of the refreshed browser.
+        changeEl += word[i];
 
+    }
+    var stringArray = random.split('').join(' ');
+    stringArray += " "; // ["my", " ", "car", " ", "is", " ", "red"]
+    for (var x = 0; x < stringArray.length; x++) {
+        storedWord.push(stringArray[x].toUpperCase());
+    }
+    var res = random.split(" ");
+    //res = res.join("");
+    //res = res.join(" ");
+    //console.log(changeEl.length);
+    console.log(res.join(', '));
+    console.log(stringArray);
+    console.log(storedWord);
+    var ar = changeEl.split("");
+    var compareArrays = stringArray.split(" ");
+    console.log(compareArrays.join(', '));
+    // var whileTrue = true;
+    document.onkeyup = function (event) {
+        if (ar.join("") !== storedWord.join("")) {
+            document.getElementById("youWon").innerHTML = "";
+        }
+        addValue = event.key; //well i typed some letters and it showed in the chrome console
+        console.log(addValue);
+        console.log(random);
+        //var question = prompt('guess a letter!');
+        for (var j = 0; j < stringArray.length; j++) {
+            if (ar.join("") == storedWord.join("")) {
+                console.log(true);
+                
+                document.getElementById("youWon").innerHTML = "<p>You Won!</p>";
+                afterMainGame();
+            }
+            if (addValue === stringArray[j].toLowerCase()) {
+                console.log(stringArray[j]);
+                //console.log(true);
+                console.log(changeEl[j]);
 
-// function hangMan () {
-//first pick the random word
-    //var random = allWords[Math.floor(Math.random()*allWords.length)];
-    // console.log(random);
-    // it is successful! now put the lines of the word that got picked in the "lines" id
+                //it now only take the  right 
+                //changeEl = ar.replace(ar[j], addValue);
+                ar[j] = addValue.toUpperCase();
+                console.log(ar)
 
+                storeGuess += addValue;
+                continue;
+                // }
+                //break;
+            }
+            console.log(changeEl);
 
+        }
+       
+        var showLines = document.getElementById("lines");
+        showLines.innerHTML = ar.join('');
+        // if (ar.join("") == storedWord.join("")) {
+        //     console.log(true);
+        //     alert("you did it!!!!");
+        //     afterMainGame();
+        // } else {
+        //     console.log(false);
+        // }
+    }
+   
+}
+mainGame();
 
-    // for (var i = 0; i < random.length; i++){
-    //     // document.getElementById("lines").innerHTML += "&#x268A;";
-    //     document.getElementById("lines").innerHTML += "______&nbsp;&nbsp;";
-
-    // } 
-    // var store;
-    // var true_ = true;
-    // while(true_){
-    //    console.log(random);
-    //    //var question = prompt('guess a letter!');
-
-    //    for(var j = 0; j < random.length; j++){
-    //         if(question == random[j].toLowerCase() ) {
-    //             //stored += stored.push(random[j]);
-    //             stored.push(random[j]);
-    //             document.getElementById("lines").innerHTML += stored[j];
-    //             addValue += stored[j];
-    //             if (question != null) {
-    //                 document.getElementById("lines").innerHTML += question;
-    //               }
-    //             //window.print(stored[j]);
-    //             console.log(stored);
-    //             alert("nice job!")
-    //             break;
-    //         }
-    //     }
-    //     console.log(addValue);
-    //     console.log(stored);//still stored data after right about for loop so thats goo
-
-    //     // Now, have to filter var stored so if it has all the words in random, the while loop
-    //     // will get out and it will look like this below \/\/\/
-    //     if (addValue == random) {//just testing if typing the exactly word break out of the while loop
-    //         true_ = false;
-    //     }
-
-    //     if(question == 'quit') {
-    //         true_ = false;
-    //     }
-
-    // }
-
-// so we have the lines now! GREAT! now it is time for the user to input theyre guess!
-//now the idea is put a text box, user puts a letter, a var/function(return) get the letter/data back
-// }
-
-
-//my problems are
-    //have to get values in the hangman function
-    //
 
