@@ -1,28 +1,11 @@
-//FIRST SETUP:
-//      its probably the best to just make this logic 
-//      one big function. When clicked it will 
-//      showed the lines of the word first. On the right put a pic of a hangman symbol.
-
-//LOGIC: 
-// Just some basic syntax im going to need:
-// Math.random, 
-// arrays of hangman words
-// for loops
-// some vars to organize everything(orginizing will help alot!)
-// Big logic is filling in the empty lines of hangman letters. 
-// Theres many way i can go about doing it, probably a for loop 
-// guesses will be in the loop until the player quits or gets the word right.
-// (maybe after that works we can show the word if player quits )
-// 
-// In the beginning, the player can pick unlimited guesses.(after that works, 
-// we wil pick limit of how many picked the player can guess)
-
+//This is the first function, after the first game() is over with, this will 
+//will get called and restart a new game. When this second game will be done,
+//the the first function will be called and keep switched back and forth.
 function afterMainGame() {
     var storeGuess = "";
     var addValue = "";
     var showLines = document.getElementById("lines");
 
-    //document.getElementById("youWon").innerHTML = "";
     //var stored = "";//instead of just var string, im 
     //thinking adding a array so i can compare later on with thr random word and show the letter correctly
     var storedWord = [];
@@ -103,7 +86,6 @@ function mainGame() {
     function delayedAlert() {
         timeoutID = window.setTimeout(window.alert, 2*1000, 'You Won!');
     }
-    //document.getElementById("youWon").innerHTML = "";
     //var stored = "";//instead of just var string, im 
     //thinking adding a array so i can compare later on with thr random word and show the letter correctly
     var storedWord = [];
