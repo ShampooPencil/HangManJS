@@ -1,16 +1,10 @@
-//This is the first function, after the first game() is over with, this will 
-//will get called and restart a new game. When this second game will be done,
-//the the first function will be called and keep switched back and forth.
-var wins = 0;
-function mainGame() {
+
+//var wins is in the mainGame() function, now we are share it so we can add the the wins back and forth to the two functions
+function afterMainGame() {
     var userCount = 30;
     var addValue = "";
     var showLines = document.getElementById("lines");
-    var timeoutID;
 
-    function delayedAlert() {
-        timeoutID = window.setTimeout(window.alert, 2 * 1000, 'You Won!');
-    }
     //var stored = "";//instead of just var string, im 
     //thinking adding a array so i can compare later on with thr random word and show the letter correctly
     var storedWord = [];
@@ -37,44 +31,45 @@ function mainGame() {
     var ar = changeEl.split("");
     var compareArrays = stringArray.split(" ");
     console.log(compareArrays.join(', '));
-    // var whileTrue = true;
     var subtrctGuess = document.getElementById("count");
     subtrctGuess.innerHTML = "Guesses = " + userCount;
-    document.getElementById("wins").innerHTML = "Wins = " + wins;
+    // var whileTrue = true;
     document.onkeyup = function (event) {
         if (ar.join("") !== storedWord.join("")) {
             document.getElementById("youWon").innerHTML = "";
         }
-
         userCount = userCount - 1;
         subtrctGuess.innerHTML = "Guesses = " + userCount;
-        console.log(userCount);
-        addValue = event.key; //well i typed some letters and it showed in the chrome console
+        addValue = event.key; //well i typed some letters and it showed in the chrome inspect console log
         console.log(addValue);
         console.log(random);
         if (userCount < 0) {
             document.getElementById("youWon").innerHTML = "<p>You lost! Click any key to start a new one!</p>";
             userCount = 30;
             //********have to just copy and paste in other function, remember to restart userCount!!
-            afterMainGame();
+            mainGame();
         }
+        //var question = prompt('guess a letter!');
         for (var j = 0; j < stringArray.length; j++) {
             if (ar.join("") === storedWord.join("")) {
                 console.log(true);
                 wins += 1;
+                // wins = wins + 1;
                 console.log(wins);
                 document.getElementById("wins").innerHTML = "Wins = " + wins;
                 document.getElementById("youWon").innerHTML = "<p>You Won! Click any key to start a new one!</p>";
-                afterMainGame();
+                mainGame();
                 break;
             }
             if (addValue === stringArray[j].toLowerCase()) {
                 console.log(stringArray[j]);
+                //console.log(true);
                 console.log(changeEl[j]);
                 ar[j] = addValue.toUpperCase();
                 console.log(ar)
-                //storeGuess += addValue;
+
                 continue;
+
             }
             console.log(changeEl);
 
@@ -86,6 +81,3 @@ function mainGame() {
     }
 
 }
-mainGame();
-
-
