@@ -2,3 +2,8 @@
     letter-spacing: 5px;
     font-size: 30px;
 }
+.container {
+    text-align: center;
+    vertical-align: middle;
+    color: red;
+}
