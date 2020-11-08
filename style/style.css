@@ -5,5 +5,16 @@
 .container {
     text-align: center;
     vertical-align: middle;
-    color: red;
+    color: orange;
+}
+#wins{
+    color: blue;
+    padding: 5px;
+    margin: 5px;
+}
+#count{
+    color: black;
+    padding: 5px;
+    margin: 5px;
+    
 }
